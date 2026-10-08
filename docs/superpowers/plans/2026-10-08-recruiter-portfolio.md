@@ -6,7 +6,7 @@
 
 **Architecture:** Astro generates every public route as static HTML from typed English and Russian content modules. Shared layouts and small focused components provide the editorial visual system; framework hydration is avoided, and short progressive-enhancement scripts handle only navigation, CV menus and certificate dialogs. CVs use dedicated print routes backed by the same structured content and a Playwright script that exports deterministic PDFs.
 
-**Tech Stack:** Astro 7.3.7, TypeScript 7.0.2, CSS, Vitest 5.0.3, Playwright 1.64.0, Astro Sitemap 3.7.4, axe-core Playwright 4.13.0, PDF.js 6.4.299, Sharp 0.35.5, Cheerio 1.2.0, Fontsource 5.3.0
+**Tech Stack:** Astro 7.3.7, TypeScript 6.0.3, CSS, Vitest 5.0.3, Playwright 1.64.0, Astro Sitemap 3.7.4, axe-core Playwright 4.13.0, PDF.js 6.4.299, Sharp 0.35.5, Cheerio 1.2.0, Fontsource 5.3.0
 
 **Spec:** `docs/portfolio-spec.md`
 
