@@ -1,0 +1,23 @@
+---
+import type { PortfolioContent } from '../lib/types';
+type Props = { content: PortfolioContent['education'] };
+const { content } = Astro.props;
+---
+
+<section id="education" class="section container education" aria-labelledby="education-title">
+  <div class="section-heading">
+    <p class="section-number">08</p>
+    <h2 id="education-title">{content.title}</h2>
+  </div>
+  <div class="education-grid">
+    <div>
+      <p class="eyebrow">{content.period}</p>
+      <h3>{content.institution}</h3>
+    </div>
+    <dl>
+      <div><dt>Degree</dt><dd>{content.degree}</dd></div>
+      <div><dt>Result</dt><dd>{content.details}</dd></div>
+      <div><dt>Thesis</dt><dd>{content.thesis}</dd></div>
+    </dl>
+  </div>
+</section>

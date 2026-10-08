@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import teachingPhoto from '../assets/mikhail-avito.jpg';
+import type { PortfolioContent } from '../lib/types';
+
+type Props = { locale: 'en' | 'ru'; content: PortfolioContent['teaching'] };
+const { locale, content } = Astro.props;
+---
+
+<section id="teaching" class="section container teaching" aria-labelledby="teaching-title">
+  <div class="section-heading">
+    <p class="section-number">04</p>
+    <h2 id="teaching-title">{content.title}</h2>
+  </div>
+  <div class="teaching-grid">
+    <figure class="teaching-photo">
+      <Image
+        src={teachingPhoto}
+        alt={locale === 'en' ? 'Mikhail Rogozin during a professional event' : 'Михаил Рогозин на профессиональном мероприятии'}
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 760px) 92vw, 46vw"
+        format="webp"
+      />
+    </figure>
+    <div class="teaching-entries">
+      {content.entries.map((entry) => (
+        <article>
+          <p class="eyebrow">{entry.period}</p>
+          <h3>{entry.heading}</h3>
+          {entry.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {entry.proof && <p class="proof-line">{entry.proof}</p>}
+          {entry.link && <a class="text-link" href={entry.link.href}>{entry.link.label} <span aria-hidden="true">↗</span></a>}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+import type { Award, Locale } from '../lib/types';
+type Props = { locale: Locale; title: string; awards: Award[] };
+const { locale, title, awards } = Astro.props;
+const viewLabel = locale === 'en' ? 'View certificate' : 'Открыть диплом';
+const downloadLabel = locale === 'en' ? 'Download original PDF' : 'Скачать оригинал в PDF';
+---
+
+<section id="awards" class="section container" aria-labelledby="awards-title">
+  <div class="section-heading">
+    <p class="section-number">06</p>
+    <h2 id="awards-title">{title}</h2>
+  </div>
+  <div class="awards-list">
+    {awards.map((award, index) => (
+      <article class="award-row">
+        <p class="award-rank">0{index + 1}</p>
+        <div>
+          <p class="eyebrow">{award.event}</p>
+          <h3>{award.title}</h3>
+          {award.copy.map((paragraph) => <p>{paragraph}</p>)}
+          <p class="proof-line">{award.team}</p>
+          <div class="inline-actions">
+            <a href={award.certificateImage}>{viewLabel}</a>
+            <a href={award.certificatePdf} download>{downloadLabel}</a>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

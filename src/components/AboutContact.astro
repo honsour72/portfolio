@@ -1,0 +1,34 @@
+---
+import { cvLinksForLocale } from '../lib/i18n';
+import type { PortfolioContent } from '../lib/types';
+
+type Props = { content: PortfolioContent };
+const { content } = Astro.props;
+const cv = cvLinksForLocale(content.locale);
+---
+
+<div class="about-contact">
+  <section id="about" class="section container about" aria-labelledby="about-title">
+    <div class="section-heading">
+      <p class="section-number">09</p>
+      <h2 id="about-title">{content.about.title}</h2>
+    </div>
+    <div class="about-copy">
+      {content.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </section>
+  <section id="contact" class="contact" aria-labelledby="contact-title">
+    <div class="container contact-grid">
+      <div>
+        <p class="eyebrow">{content.contact.location}</p>
+        <h2 id="contact-title">{content.contact.title}</h2>
+        <p>{content.contact.copy}</p>
+      </div>
+      <div class="contact-actions">
+        {content.contact.links.map((link) => <a href={link.href}>{link.label} <span aria-hidden="true">↗</span></a>)}
+        <a href={cv.compact} download>{content.cvMenu.compact} <span aria-hidden="true">↓</span></a>
+        <a href={cv.extended} download>{content.cvMenu.extended} <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+  </section>
+</div>

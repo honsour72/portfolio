@@ -1,0 +1,15 @@
+---
+import type { Locale } from '../lib/types';
+import { portfolioByLocale } from '../content/portfolio';
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const content = portfolioByLocale[locale];
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© {new Date().getFullYear()} {content.hero.name}</p>
+    <p>{content.footer}</p>
+  </div>
+</footer>

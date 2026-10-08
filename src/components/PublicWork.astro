@@ -1,0 +1,32 @@
+---
+import type { PortfolioContent } from '../lib/types';
+type Props = { content: PortfolioContent['publicWork'] };
+const { content } = Astro.props;
+---
+
+<section id="writing" class="section container public-work" aria-labelledby="writing-title">
+  <div class="section-heading">
+    <p class="section-number">05</p>
+    <h2 id="writing-title">{content.title}</h2>
+  </div>
+  <div class="public-work-grid">
+    <article class="featured-article">
+      <p class="eyebrow">{content.featured.label}</p>
+      <h3>{content.featured.title}</h3>
+      <p>{content.featured.copy}</p>
+      <p class="article-metric">{content.featured.metric}</p>
+      <a class="text-link" href={content.featured.link.href}>{content.featured.link.label} <span aria-hidden="true">↗</span></a>
+    </article>
+    <ul class="channel-list">
+      {content.channels.map((channel) => (
+        <li>
+          <a href={channel.href}>
+            <strong>{channel.name}</strong>
+            <span>{channel.metric}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

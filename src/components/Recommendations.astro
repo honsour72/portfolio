@@ -1,0 +1,32 @@
+---
+import type { PortfolioContent } from '../lib/types';
+
+type Props = {
+  title: string;
+  items: PortfolioContent['recommendations'];
+  note?: string;
+};
+const { title, items, note } = Astro.props;
+---
+
+<section id="recommendations" class="section recommendations" aria-labelledby="recommendations-title">
+  <div class="container">
+    <div class="section-heading section-heading-light">
+      <p class="section-number">07</p>
+      <h2 id="recommendations-title">{title}</h2>
+    </div>
+    <div class="recommendation-grid">
+      {items.map((item) => (
+        <figure>
+          <div class="monogram" data-recommendation-monogram={item.initials}>{item.initials}</div>
+          <blockquote>“{item.quote}”</blockquote>
+          <figcaption>
+            <a href={item.profileUrl}>{item.name}</a>
+            <span>{item.relationship}</span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    {note && <p class="recommendation-note">{note}</p>}
+  </div>
+</section>

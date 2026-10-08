@@ -1,0 +1,17 @@
+---
+import type { Metric } from '../lib/types';
+type Props = { items: Metric[] };
+const { items } = Astro.props;
+---
+
+<section class="evidence-band" aria-label="Evidence">
+  <div class="container evidence-grid">
+    {items.map((item, index) => (
+      <div class="evidence-item" data-evidence>
+        <span class="metric-index">{String(index + 1).padStart(2, '0')}</span>
+        <strong>{item.value}</strong>
+        <span>{item.label}</span>
+      </div>
+    ))}
+  </div>
+</section>

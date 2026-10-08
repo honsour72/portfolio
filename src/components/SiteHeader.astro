@@ -1,0 +1,39 @@
+---
+import { cvLinksForLocale } from '../lib/i18n';
+import type { Locale } from '../lib/types';
+import { portfolioByLocale } from '../content/portfolio';
+
+type Props = { locale: Locale; path: string };
+
+const { locale, path } = Astro.props;
+const content = portfolioByLocale[locale];
+const otherLocale: Locale = locale === 'en' ? 'ru' : 'en';
+const otherPath = path.replace(`/${locale}/`, `/${otherLocale}/`);
+const cv = cvLinksForLocale(locale);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="wordmark" href={`/${locale}/`} aria-label={content.hero.name}>{content.hero.name.split(' ')[0]} R.</a>
+    <nav class="primary-nav" aria-label={locale === 'en' ? 'Primary navigation' : 'Основная навигация'}>
+      <a href={`/${locale}/#work`}>{content.navigation[0].label}</a>
+      <a href={`/${locale}/#experience`}>{content.navigation[1].label}</a>
+      <a href={`/${locale}/#writing`}>{content.navigation[3].label}</a>
+      <a href={`/${locale}/#contact`}>{content.navigation[6].label}</a>
+    </nav>
+    <div class="header-actions">
+      <div class="locale-switch" aria-label={locale === 'en' ? 'Language' : 'Язык'}>
+        <span aria-current="page">{locale.toUpperCase()}</span>
+        <span aria-hidden="true">/</span>
+        <a href={otherPath} lang={otherLocale}>{otherLocale.toUpperCase()}</a>
+      </div>
+      <details class="cv-menu">
+        <summary>{content.cvMenu.label}</summary>
+        <div class="cv-menu-panel">
+          <a href={cv.compact} download>{content.cvMenu.compact}</a>
+          <a href={cv.extended} download>{content.cvMenu.extended}</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,22 @@
+---
+import type { PortfolioContent } from '../lib/types';
+type Props = { content: PortfolioContent['technical'] };
+const { content } = Astro.props;
+---
+
+<section id="technical" class="section technical-section" aria-labelledby="technical-title">
+  <div class="container technical-inner">
+    <div class="section-heading section-heading-light">
+      <p class="section-number">03</p>
+      <h2 id="technical-title">{content.title}</h2>
+    </div>
+    <div class="technical-list">
+      {content.groups.map((group) => (
+        <div class="technical-row">
+          <h3>{group.title}</h3>
+          <p>{group.items.join(' · ')}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

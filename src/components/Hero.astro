@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/mikhail-hero.jpg';
+import { cvLinksForLocale } from '../lib/i18n';
+import type { PortfolioContent } from '../lib/types';
+
+type Props = { content: PortfolioContent };
+const { content } = Astro.props;
+const cv = cvLinksForLocale(content.locale);
+---
+
+<section class="hero container" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow">{content.hero.eyebrow}</p>
+    <h1 id="hero-title">{content.hero.name}</h1>
+    <p class="hero-role">{content.hero.role}</p>
+    <p class="hero-summary">{content.hero.summary}</p>
+    <p class="hero-location">{content.hero.location}</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="#work">{content.hero.primaryAction}</a>
+      <a class="button button-secondary" href={cv.compact} download>{content.hero.secondaryAction}</a>
+    </div>
+  </div>
+  <figure class="hero-portrait">
+    <Image
+      src={portrait}
+      alt={content.locale === 'en' ? 'Mikhail Rogozin' : 'Михаил Рогозин'}
+      widths={[480, 720, 960]}
+      sizes="(max-width: 760px) 92vw, 40vw"
+      format="webp"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <figcaption>{content.hero.location}</figcaption>
+  </figure>
+</section>

@@ -1,0 +1,34 @@
+---
+import type { ExperienceEntry, Locale } from '../lib/types';
+
+type Props = { locale: Locale; title: string; entries: ExperienceEntry[] };
+const { locale, title, entries } = Astro.props;
+const currentLabel = locale === 'en' ? 'Current' : 'Сейчас';
+---
+
+<section id="experience" class="section container" aria-labelledby="experience-title">
+  <div class="section-heading">
+    <p class="section-number">02</p>
+    <h2 id="experience-title">{title}</h2>
+  </div>
+  <div class="timeline">
+    {entries.map((entry, index) => (
+      <article class:list={['timeline-entry', entry.compact && 'timeline-entry-compact']}>
+        <div class="timeline-meta">
+          <p>{entry.period}</p>
+          {index === 0 && <span>{currentLabel}</span>}
+        </div>
+        <div class="timeline-body">
+          <p class="timeline-company">{entry.company}</p>
+          <h3>{entry.role}</h3>
+          {entry.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+          {entry.stack && (
+            <ul class="tag-list" aria-label="Technology stack">
+              {entry.stack.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
