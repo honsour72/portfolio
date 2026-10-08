@@ -1,0 +1,20 @@
+---
+import type { CaseStudy } from '../lib/types';
+type Props = { diagram: CaseStudy['diagram']; locale: CaseStudy['locale'] };
+const { diagram, locale } = Astro.props;
+---
+
+<section id="architecture" class="case-section architecture-section" data-architecture-diagram data-variant={diagram.variant}>
+  <p class="case-kicker">{locale === 'en' ? 'Architecture' : 'Архитектура'}</p>
+  <h2>{locale === 'en' ? 'Public system view' : 'Публичная схема системы'}</h2>
+  <ol class:list={['architecture-flow', `architecture-${diagram.variant}`]}>
+    {diagram.labels.map((label, index) => (
+      <li>
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <strong>{label}</strong>
+        {index < diagram.labels.length - 1 && <i aria-hidden="true">→</i>}
+      </li>
+    ))}
+  </ol>
+  <p class="diagram-caption">{diagram.caption}</p>
+</section>

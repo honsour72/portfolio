@@ -1,0 +1,21 @@
+---
+import type { CaseStudy } from '../lib/types';
+type Props = { content: CaseStudy };
+const { content } = Astro.props;
+---
+
+<header class="case-hero">
+  <div class="container case-hero-inner">
+    <p class="eyebrow">{content.label}</p>
+    <h1>{content.title}</h1>
+    <p class="case-intro">{content.intro}</p>
+    <dl class="case-details">
+      {content.details.map((detail) => (
+        <div data-case-detail>
+          <dt>{detail.label}</dt>
+          <dd>{detail.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</header>

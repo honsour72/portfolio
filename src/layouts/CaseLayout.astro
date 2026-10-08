@@ -1,0 +1,13 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CaseStudy } from '../lib/types';
+
+type Props = { content: CaseStudy; path: string };
+const { content, path } = Astro.props;
+---
+
+<BaseLayout locale={content.locale} title={content.seo.title} description={content.seo.description} path={path}>
+  <article class:list={['case-page', `case-${content.diagram.variant}`]}>
+    <slot />
+  </article>
+</BaseLayout>

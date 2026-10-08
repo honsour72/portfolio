@@ -1,7 +1,13 @@
 ---
 import { casesByLocale, caseSlugs } from '../../../../content/cases';
+import ArchitectureDiagram from '../../../../components/ArchitectureDiagram.astro';
+import CaseHero from '../../../../components/CaseHero.astro';
+import CaseMetricStrip from '../../../../components/CaseMetricStrip.astro';
+import CaseNavigation from '../../../../components/CaseNavigation.astro';
+import CaseTableOfContents from '../../../../components/CaseTableOfContents.astro';
 import { locales } from '../../../../lib/i18n';
 import type { CaseSlug, Locale } from '../../../../lib/types';
+import CaseLayout from '../../../../layouts/CaseLayout.astro';
 
 export function getStaticPaths() {
   return locales.flatMap((lang) =>
@@ -14,19 +20,32 @@ const slug = Astro.params.slug as CaseSlug;
 const content = casesByLocale[lang][slug];
 ---
 
-<!doctype html>
-<html lang={lang}>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="description" content={content.seo.description} />
-    <title>{content.seo.title}</title>
-  </head>
-  <body>
-    <main>
-      <p>{content.label}</p>
-      <h1>{content.title}</h1>
-      <p>{content.intro}</p>
-    </main>
-  </body>
-</html>
+<CaseLayout content={content} path={`/${lang}/work/${slug}/`}>
+  <CaseHero content={content} />
+  {content.metrics && <CaseMetricStrip metrics={content.metrics} />}
+  <div class="container case-content-grid">
+    <CaseTableOfContents content={content} />
+    <div class="case-article">
+      {content.sections.map((section) => (
+        <>
+          <section id={section.id} class="case-section" data-case-section>
+            <p class="case-kicker">{section.id.replace('-', ' ')}</p>
+            <h2>{section.title}</h2>
+            {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+            {section.bullets && (
+              <ul>{section.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+            )}
+            {section.subsections?.map((subsection) => (
+              <div class="case-subsection">
+                <h3>{subsection.title}</h3>
+                {subsection.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </div>
+            ))}
+          </section>
+          {section.id === 'decision' && <ArchitectureDiagram diagram={content.diagram} locale={content.locale} />}
+        </>
+      ))}
+      <CaseNavigation content={content} />
+    </div>
+  </div>
+</CaseLayout>

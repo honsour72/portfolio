@@ -1,0 +1,16 @@
+---
+import type { CaseStudy } from '../lib/types';
+type Props = { content: CaseStudy };
+const { content } = Astro.props;
+const architectureLabel = content.locale === 'en' ? 'Architecture' : 'Архитектура';
+---
+
+<nav class="case-toc" aria-label={content.locale === 'en' ? 'Case sections' : 'Разделы кейса'}>
+  <p>{content.locale === 'en' ? 'Contents' : 'Содержание'}</p>
+  <ol>
+    {content.sections.map((section) => (
+      <li><a href={`#${section.id}`}>{section.title}</a></li>
+    ))}
+    <li><a href="#architecture">{architectureLabel}</a></li>
+  </ol>
+</nav>

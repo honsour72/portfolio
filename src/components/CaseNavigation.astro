@@ -1,0 +1,16 @@
+---
+import type { CaseStudy } from '../lib/types';
+type Props = { content: CaseStudy };
+const { content } = Astro.props;
+---
+
+<nav class="case-end-navigation" aria-label={content.locale === 'en' ? 'Case navigation' : 'Навигация по кейсам'}>
+  <a href={`/${content.locale}/#work`}>
+    <span>←</span>
+    <strong>{content.backLabel}</strong>
+  </a>
+  <a href={content.adjacent.href}>
+    <span>{content.adjacent.label}</span>
+    <strong>{content.adjacent.title} →</strong>
+  </a>
+</nav>
