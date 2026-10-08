@@ -1,15 +1,10 @@
-import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { load } from 'cheerio';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 const root = process.cwd();
-
-beforeAll(() => {
-  execFileSync('pnpm', ['build'], { cwd: root, stdio: 'pipe' });
-});
 
 describe.each(['en', 'ru'] as const)('%s CV pages', (locale) => {
   it.each(['compact', 'extended'] as const)('renders the approved %s CV contract', (variant) => {

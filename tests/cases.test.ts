@@ -1,17 +1,12 @@
-import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { load } from 'cheerio';
-import { beforeAll, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { casesByLocale, caseSlugs } from '../src/content/cases';
 
 const root = process.cwd();
-
-beforeAll(() => {
-  execFileSync('pnpm', ['build'], { cwd: root, stdio: 'pipe' });
-});
 
 describe.each(['en', 'ru'] as const)('%s case studies', (locale) => {
   for (const slug of caseSlugs) {
