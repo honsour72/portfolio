@@ -194,6 +194,49 @@ h3 {
   background: var(--accent-light);
 }
 
+.mobile-navigation {
+  display: none;
+  position: relative;
+}
+
+.mobile-navigation summary {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  border: 1px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-navigation summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-navigation nav {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  width: min(310px, calc(100vw - 32px));
+  border: 1px solid var(--ink);
+  background: var(--surface);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.mobile-navigation nav a {
+  min-height: 48px;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
+.mobile-navigation nav a + a {
+  border-top: 1px solid var(--rule);
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
@@ -754,6 +797,101 @@ h3 {
   min-height: 44px;
   padding: 8px 14px;
   border: 1px solid var(--ink);
+}
+
+.certificate-evidence {
+  display: grid;
+  grid-template-columns: minmax(140px, 220px) 1fr;
+  align-items: end;
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.certificate-thumbnail {
+  display: block;
+  padding: 8px;
+  border: 1px solid var(--rule);
+  background: white;
+}
+
+.certificate-thumbnail img {
+  width: 100%;
+  aspect-ratio: 1.414 / 1;
+  object-fit: contain;
+}
+
+.certificate-evidence .inline-actions {
+  margin: 0;
+}
+
+.certificate-evidence button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+  cursor: pointer;
+}
+
+.certificate-dialog {
+  width: min(1100px, calc(100vw - 40px));
+  max-width: none;
+  max-height: calc(100vh - 40px);
+  margin: auto;
+  padding: 20px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.certificate-dialog::backdrop {
+  background: rgb(9 11 15 / 88%);
+}
+
+.certificate-dialog-panel {
+  display: grid;
+  max-height: calc(100vh - 80px);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: 18px;
+  background: var(--surface);
+}
+
+.certificate-dialog-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 14px;
+}
+
+.certificate-dialog-bar strong {
+  font-family: var(--display);
+}
+
+.certificate-dialog-bar button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--ink);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.certificate-dialog img {
+  width: 100%;
+  min-height: 0;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.certificate-dialog .button {
+  justify-self: end;
+  margin-top: 14px;
 }
 
 .recommendations {
@@ -1389,6 +1527,10 @@ h3 {
     white-space: nowrap;
   }
 
+  .mobile-navigation {
+    display: block;
+  }
+
   .cv-menu summary::before {
     content: 'CV';
   }
@@ -1481,6 +1623,14 @@ h3 {
   .award-row {
     grid-template-columns: 56px 1fr;
     gap: 14px;
+  }
+
+  .certificate-evidence {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-thumbnail {
+    max-width: 220px;
   }
 
   .award-rank {

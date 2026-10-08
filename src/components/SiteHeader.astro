@@ -1,7 +1,8 @@
 ---
-import { cvLinksForLocale } from '../lib/i18n';
 import type { Locale } from '../lib/types';
 import { portfolioByLocale } from '../content/portfolio';
+import CvMenu from './CvMenu.astro';
+import MobileNavigation from './MobileNavigation.astro';
 
 type Props = { locale: Locale; path: string };
 
@@ -9,7 +10,6 @@ const { locale, path } = Astro.props;
 const content = portfolioByLocale[locale];
 const otherLocale: Locale = locale === 'en' ? 'ru' : 'en';
 const otherPath = path.replace(`/${locale}/`, `/${otherLocale}/`);
-const cv = cvLinksForLocale(locale);
 ---
 
 <header class="site-header">
@@ -22,18 +22,13 @@ const cv = cvLinksForLocale(locale);
       <a href={`/${locale}/#contact`}>{content.navigation[6].label}</a>
     </nav>
     <div class="header-actions">
+      <MobileNavigation locale={locale} navigation={content.navigation} />
       <div class="locale-switch" aria-label={locale === 'en' ? 'Language' : 'Язык'}>
         <span aria-current="page">{locale.toUpperCase()}</span>
         <span aria-hidden="true">/</span>
         <a href={otherPath} lang={otherLocale}>{otherLocale.toUpperCase()}</a>
       </div>
-      <details class="cv-menu">
-        <summary>{content.cvMenu.label}</summary>
-        <div class="cv-menu-panel">
-          <a href={cv.compact} download>{content.cvMenu.compact}</a>
-          <a href={cv.extended} download>{content.cvMenu.extended}</a>
-        </div>
-      </details>
+      <CvMenu locale={locale} labels={content.cvMenu} />
     </div>
   </div>
 </header>

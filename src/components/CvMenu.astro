@@ -1,0 +1,16 @@
+---
+import { cvLinksForLocale } from '../lib/i18n';
+import type { Locale, PortfolioContent } from '../lib/types';
+
+type Props = { locale: Locale; labels: PortfolioContent['cvMenu'] };
+const { locale, labels } = Astro.props;
+const cv = cvLinksForLocale(locale);
+---
+
+<details class="cv-menu" data-cv-menu>
+  <summary>{labels.label}</summary>
+  <div class="cv-menu-panel">
+    <a href={cv.compact} download>{labels.compact}</a>
+    <a href={cv.extended} download>{labels.extended}</a>
+  </div>
+</details>

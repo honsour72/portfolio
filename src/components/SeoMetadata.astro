@@ -1,0 +1,33 @@
+---
+import type { Locale } from '../lib/types';
+
+type Props = {
+  locale: Locale;
+  title: string;
+  description: string;
+  path: string;
+};
+
+const { locale, title, description, path } = Astro.props;
+const otherLocale: Locale = locale === 'en' ? 'ru' : 'en';
+const otherPath = path.replace(`/${locale}/`, `/${otherLocale}/`);
+const canonical = new URL(path, Astro.site);
+const defaultPath = path.replace(`/${locale}/`, '/en/');
+const image = new URL('/images/mikhail-rogozin.jpg', Astro.site);
+---
+
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" hreflang={locale} href={canonical} />
+<link rel="alternate" hreflang={otherLocale} href={new URL(otherPath, Astro.site)} />
+<link rel="alternate" hreflang="x-default" href={new URL(defaultPath, Astro.site)} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content={locale === 'en' ? 'en_US' : 'ru_RU'} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={image} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />

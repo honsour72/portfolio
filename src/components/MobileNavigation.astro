@@ -1,0 +1,12 @@
+---
+import type { Locale, PortfolioContent } from '../lib/types';
+type Props = { locale: Locale; navigation: PortfolioContent['navigation'] };
+const { locale, navigation } = Astro.props;
+---
+
+<details class="mobile-navigation">
+  <summary>{locale === 'en' ? 'Menu' : 'Меню'}</summary>
+  <nav aria-label={locale === 'en' ? 'Mobile navigation' : 'Мобильная навигация'}>
+    {navigation.map((item) => <a href={`/${locale}/#${item.id}`}>{item.label}</a>)}
+  </nav>
+</details>

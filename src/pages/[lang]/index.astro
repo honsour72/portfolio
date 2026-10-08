@@ -6,6 +6,7 @@ import EvidenceStrip from '../../components/EvidenceStrip.astro';
 import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
 import Hero from '../../components/Hero.astro';
 import PublicWork from '../../components/PublicWork.astro';
+import PersonJsonLd from '../../components/PersonJsonLd.astro';
 import Recommendations from '../../components/Recommendations.astro';
 import SelectedWork from '../../components/SelectedWork.astro';
 import Teaching from '../../components/Teaching.astro';
@@ -26,6 +27,7 @@ const cases = caseSlugs.map((slug) => casesByLocale[lang][slug]);
 ---
 
 <BaseLayout locale={lang} title={content.seo.title} description={content.seo.description} path={`/${lang}/`}>
+  <PersonJsonLd slot="head" locale={lang} />
   <Hero content={content} />
   <EvidenceStrip items={content.evidenceStrip} />
   <SelectedWork locale={lang} title={content.selectedWorkTitle} cases={cases} />

@@ -1,0 +1,30 @@
+---
+import { externalLinks, portfolioByLocale } from '../content/portfolio';
+import type { Locale } from '../lib/types';
+
+type Props = { locale: Locale };
+const { locale } = Astro.props;
+const content = portfolioByLocale[locale];
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: content.hero.name,
+  jobTitle: content.hero.role,
+  email: externalLinks.email,
+  url: `https://m-rogozin.ru/${locale}/`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: locale === 'en' ? 'Saint Petersburg' : 'Санкт-Петербург',
+    addressCountry: 'RU',
+  },
+  sameAs: [
+    externalLinks.linkedin,
+    externalLinks.habr,
+    externalLinks.youtube,
+    externalLinks.telegramChannel,
+    externalLinks.profi,
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

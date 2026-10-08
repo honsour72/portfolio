@@ -1,0 +1,57 @@
+---
+import type { Award, Locale } from '../lib/types';
+
+type Props = { award: Award; locale: Locale };
+const { award, locale } = Astro.props;
+const viewLabel = locale === 'en' ? 'View certificate' : 'Открыть диплом';
+const downloadLabel = locale === 'en' ? 'Download original PDF' : 'Скачать оригинал в PDF';
+const closeLabel = locale === 'en' ? 'Close' : 'Закрыть';
+const dialogLabel = `${award.event} ${locale === 'en' ? 'certificate' : 'диплом'}`;
+---
+
+<div class="certificate-evidence">
+  <a class="certificate-thumbnail" href={award.certificateImage} aria-label={viewLabel}>
+    <img src={award.certificateImage} alt="" width="480" height="340" loading="lazy" />
+  </a>
+  <div class="inline-actions">
+    <button type="button" data-certificate-opener={award.id}>{viewLabel}</button>
+    <a href={award.certificatePdf} download>{downloadLabel}</a>
+  </div>
+</div>
+
+<dialog class="certificate-dialog" data-certificate-dialog={award.id} aria-label={dialogLabel}>
+  <div class="certificate-dialog-panel">
+    <div class="certificate-dialog-bar">
+      <strong>{award.event}</strong>
+      <button type="button" data-certificate-close>{closeLabel}</button>
+    </div>
+    <img src={award.certificateImage} alt={dialogLabel} width="1440" height="1020" />
+    <a class="button button-primary" href={award.certificatePdf} download>{downloadLabel}</a>
+  </div>
+</dialog>
+
+<script>
+  const openers = document.querySelectorAll<HTMLButtonElement>('[data-certificate-opener]');
+
+  for (const opener of openers) {
+    const id = opener.dataset.certificateOpener;
+    const dialog = document.querySelector<HTMLDialogElement>(`[data-certificate-dialog="${id}"]`);
+    if (!dialog) continue;
+
+    const closeButton = dialog.querySelector<HTMLButtonElement>('[data-certificate-close]');
+    const close = () => {
+      dialog.close();
+      opener.focus();
+    };
+
+    opener.addEventListener('click', () => dialog.showModal());
+    closeButton?.addEventListener('click', close);
+    dialog.addEventListener('cancel', (event) => {
+      event.preventDefault();
+      close();
+    });
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+  }
+</script>
