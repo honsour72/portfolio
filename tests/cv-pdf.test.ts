@@ -14,7 +14,12 @@ for (const locale of ['en', 'ru'] as const) {
     describe(filename, () => {
       it('exists with the exact page count and selectable identity text', async () => {
         expect(existsSync(path)).toBe(true);
-        const pdf = await getDocument({ data: new Uint8Array(readFileSync(path)) }).promise;
+        const pdfBytes = readFileSync(path);
+        const pdfSource = pdfBytes.toString('latin1');
+        expect(pdfSource).toContain("/CreationDate (D:20261008000000+00'00')");
+        expect(pdfSource).toContain("/ModDate (D:20261008000000+00'00')");
+
+        const pdf = await getDocument({ data: new Uint8Array(pdfBytes) }).promise;
         expect(pdf.numPages).toBe(variant === 'compact' ? 1 : 2);
 
         let text = '';

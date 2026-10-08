@@ -13,7 +13,7 @@ export default defineConfig({
     viewport: { width: 1440, height: 1000 },
   },
   webServer: {
-    command: 'pnpm dev --host 127.0.0.1',
+    command: 'pnpm dev --host 127.0.0.1 --ignore-lock',
     url: 'http://127.0.0.1:4321/en/',
     reuseExistingServer: true,
     timeout: 30_000,

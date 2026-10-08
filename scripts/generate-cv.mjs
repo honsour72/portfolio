@@ -1,5 +1,5 @@
 import { createServer } from 'node:http';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createReadStream, existsSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 
@@ -8,6 +8,7 @@ import { chromium } from '@playwright/test';
 const root = process.cwd();
 const distDirectory = join(root, 'dist');
 const outputDirectory = join(root, 'public', 'files', 'cv');
+const stablePdfDate = "D:20261008000000+00'00'";
 
 if (!existsSync(join(distDirectory, 'cv', 'en', 'compact', 'index.html'))) {
   throw new Error('CV routes are missing from dist. Run `pnpm build` before generating PDFs.');
@@ -61,6 +62,14 @@ try {
         tagged: true,
         outline: true,
       });
+
+      const pdfPath = join(outputDirectory, `mikhail-rogozin-cv-${locale}-${variant}.pdf`);
+      const pdf = await readFile(pdfPath);
+      const normalised = Buffer.from(
+        pdf.toString('latin1').replaceAll(/D:\d{14}\+00'00'/g, stablePdfDate),
+        'latin1',
+      );
+      await writeFile(pdfPath, normalised);
     }
   }
 } finally {
