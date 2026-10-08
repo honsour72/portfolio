@@ -1,0 +1,28 @@
+---
+import '@fontsource/instrument-sans/500.css';
+import '@fontsource/instrument-sans/600.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../styles/cv.css';
+
+import type { Locale } from '../lib/types';
+
+type Props = { locale: Locale; title: string };
+const { locale, title } = Astro.props;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="author" content={locale === 'en' ? 'Mikhail Rogozin' : 'Михаил Рогозин'} />
+    <meta name="description" content={title} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main><slot /></main>
+  </body>
+</html>

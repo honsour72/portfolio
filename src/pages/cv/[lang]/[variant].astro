@@ -1,0 +1,85 @@
+---
+import CvEducation from '../../../components/cv/CvEducation.astro';
+import CvEvidence from '../../../components/cv/CvEvidence.astro';
+import CvExperience from '../../../components/cv/CvExperience.astro';
+import CvHeader from '../../../components/cv/CvHeader.astro';
+import { casesByLocale, caseSlugs } from '../../../content/cases';
+import { cvByLocale } from '../../../content/cv';
+import { portfolioByLocale } from '../../../content/portfolio';
+import { locales } from '../../../lib/i18n';
+import type { Locale } from '../../../lib/types';
+import CvLayout from '../../../layouts/CvLayout.astro';
+
+type Variant = 'compact' | 'extended';
+
+export function getStaticPaths() {
+  return locales.flatMap((lang) =>
+    (['compact', 'extended'] as const).map((variant) => ({ params: { lang, variant } })),
+  );
+}
+
+const lang = Astro.params.lang as Locale;
+const variant = Astro.params.variant as Variant;
+const cv = cvByLocale[lang];
+const portfolio = portfolioByLocale[lang];
+const cases = caseSlugs.map((slug) => casesByLocale[lang][slug]);
+const title = `${cv.name} — ${variant === 'compact' ? 'Compact CV' : 'Extended CV'}`;
+const supportingTitle = lang === 'en' ? 'Teaching, writing and awards' : 'Преподавание, публикации и награды';
+---
+
+<CvLayout locale={lang} title={title}>
+  {variant === 'compact' ? (
+    <article class="cv-page cv-page-compact" data-cv-page>
+      <CvHeader content={cv} compact />
+      <div class="cv-two-column">
+        <div>
+          <CvExperience title={portfolio.experienceTitle} entries={portfolio.experience.slice(0, 2)} concise />
+          <CvEvidence cases={cases} technical={portfolio.technical} locale={lang} />
+        </div>
+        <aside>
+          <CvEducation content={portfolio.education} />
+          <section class="cv-section">
+            <h2>{portfolio.publicWork.title}</h2>
+            <p><strong>{portfolio.publicWork.featured.metric}</strong></p>
+            <p>{portfolio.publicWork.featured.title}</p>
+            <a href={portfolio.publicWork.featured.link.href}>{portfolio.publicWork.featured.link.label}</a>
+          </section>
+        </aside>
+      </div>
+    </article>
+  ) : (
+    <>
+      <article class="cv-page" data-cv-page>
+        <CvHeader content={cv} />
+        <CvExperience title={portfolio.experienceTitle} entries={portfolio.experience.slice(0, 3)} />
+        <CvEvidence cases={cases} technical={portfolio.technical} locale={lang} />
+      </article>
+      <article class="cv-page" data-cv-page data-cv-supporting>
+        <CvExperience title={portfolio.experienceTitle} entries={portfolio.experience.slice(3)} />
+        <section class="cv-section cv-supporting">
+          <h2>{supportingTitle}</h2>
+          <div class="cv-supporting-grid">
+            <div>
+              <h3>{portfolio.teaching.entries[0].heading}</h3>
+              <p class="cv-meta">{portfolio.teaching.entries[0].period}</p>
+              <p>{portfolio.teaching.entries[0].paragraphs.join(' ')}</p>
+            </div>
+            <div>
+              <h3>{portfolio.publicWork.featured.title}</h3>
+              <p>{portfolio.publicWork.featured.metric} · {portfolio.publicWork.featured.copy}</p>
+              <a href={portfolio.publicWork.featured.link.href}>{portfolio.publicWork.featured.link.label}</a>
+            </div>
+            {portfolio.awards.map((award) => (
+              <div>
+                <h3>{award.title}</h3>
+                <p class="cv-meta">{award.event}</p>
+                <p>{award.copy.join(' ')}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <CvEducation content={portfolio.education} />
+      </article>
+    </>
+  )}
+</CvLayout>

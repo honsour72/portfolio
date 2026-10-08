@@ -1,0 +1,15 @@
+---
+import type { PortfolioContent } from '../../lib/types';
+type Props = { content: PortfolioContent['education'] };
+const { content } = Astro.props;
+const thesisLabel = content.title === 'Education' ? 'Thesis' : 'Дипломная работа';
+---
+
+<section class="cv-section cv-education">
+  <h2>{content.title}</h2>
+  <h3>{content.institution}</h3>
+  <p class="cv-meta">{content.period}</p>
+  <p>{content.degree}</p>
+  <p>{content.details}</p>
+  <p><strong>{thesisLabel}:</strong> {content.thesis}</p>
+</section>

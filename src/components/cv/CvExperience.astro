@@ -1,0 +1,22 @@
+---
+import type { ExperienceEntry } from '../../lib/types';
+type Props = { title: string; entries: ExperienceEntry[]; concise?: boolean };
+const { title, entries, concise = false } = Astro.props;
+---
+
+<section class="cv-section cv-experience">
+  <h2>{title}</h2>
+  <div class="cv-experience-list">
+    {entries.map((entry) => (
+      <article>
+        <div class="cv-entry-title">
+          <h3>{entry.role} · {entry.company}</h3>
+          <p>{entry.period}</p>
+        </div>
+        <p>{entry.paragraphs[0]}</p>
+        {!concise && entry.paragraphs.slice(1).map((paragraph) => <p>{paragraph}</p>)}
+        {entry.stack && <p class="cv-stack">{entry.stack.join(' · ')}</p>}
+      </article>
+    ))}
+  </div>
+</section>

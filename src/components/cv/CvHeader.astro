@@ -1,0 +1,18 @@
+---
+import type { CvContent } from '../../lib/types';
+type Props = { content: CvContent; compact?: boolean };
+const { content, compact = false } = Astro.props;
+---
+
+<header class:list={['cv-header', compact && 'cv-header-compact']}>
+  <div>
+    <p class="cv-label">{content.role}</p>
+    <h1>{content.name}</h1>
+    <p class="cv-summary">{content.summary}</p>
+  </div>
+  <address>
+    <a href={`mailto:${content.email}`}>{content.email}</a>
+    <span>{content.location}</span>
+    {content.links.map((link) => <a href={link.href}>{link.label}</a>)}
+  </address>
+</header>

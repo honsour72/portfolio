@@ -1,0 +1,28 @@
+---
+import type { CaseStudy, PortfolioContent } from '../../lib/types';
+
+type Props = {
+  cases: CaseStudy[];
+  technical: PortfolioContent['technical'];
+  locale: 'en' | 'ru';
+};
+const { cases, technical, locale } = Astro.props;
+---
+
+<section class="cv-section cv-evidence">
+  <h2>{locale === 'en' ? 'Selected engineering work' : 'Избранные инженерные проекты'}</h2>
+  {cases.map((item) => (
+    <article>
+      <h3>{item.title}</h3>
+      <p>{item.intro}</p>
+      <p class="cv-stack">{item.details.find((detail) => detail.label === (locale === 'en' ? 'Stack' : 'Стек'))?.value}</p>
+    </article>
+  ))}
+</section>
+
+<section class="cv-section cv-skills">
+  <h2>{technical.title}</h2>
+  {technical.groups.map((group) => (
+    <div><strong>{group.title}</strong><span>{group.items.join(' · ')}</span></div>
+  ))}
+</section>
