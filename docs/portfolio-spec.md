@@ -1,6 +1,6 @@
 # Recruiter portfolio specification
 
-Status: approved design and functional direction. Local implementation comes before any deployment.
+Status: approved design and functional direction. The local implementation is complete; production release targets the existing `m-rogozin.ru` host.
 
 ## Goal
 
@@ -57,7 +57,7 @@ The site is a hiring portfolio. It is not an immigration page and should not dis
 1. Header and language switch.
 2. Hero with portrait, role, summary, location and two actions.
 3. Evidence strip.
-4. Two selected-work cards.
+4. Two featured engineering case-study cards.
 5. Compact career timeline.
 6. Technical profile.
 7. Teaching and mentoring.
@@ -117,6 +117,7 @@ Direction: editorial precision.
 - Secondary Avito-event image source: `/Users/myrogozin/Documents/Codex/2026-09-04/bn/portfolio-prototype/dist/assets/mikhail-avito.jpg`.
 - Preserve the photographs. Do not generate or retouch Mikhail's face.
 - Produce responsive local formats and reserve image dimensions to prevent layout shift.
+- Show the hero photograph without a caption underneath it; location remains in the hero copy.
 
 ### Certificates
 
@@ -144,8 +145,10 @@ Direction: editorial precision.
 - Prefer concrete verbs, systems, dates and verified numbers.
 - Do not add motivational slogans, fake thematic endings or corrective `not X, but Y` constructions.
 - Do not use the phrases `Real systems. Measurable impact.`, `ownership beyond code` or similar generated taglines.
-- Footer, English: `Built with AI assistance. The content and final decisions are mine.`
-- Footer, Russian: `Сайт создан с помощью ИИ. За содержание и финальные решения отвечаю я.`
+- Featured cases heading, English: `Featured engineering case studies`.
+- Featured cases heading, Russian: `Ключевые инженерные кейсы`.
+- Footer, English: `Codex built this site and drove me mad while we filled it with content.`
+- Footer, Russian: `Этот сайт создал Codex — и заставил меня перепроверить каждую строчку.`
 - Public Avito product name is only `internal workforce budgeting platform` or `budgeting tool`.
 - Exclude the intern budgeting case entirely.
 - Exclude internal Avito names, links, repositories and screenshots.
@@ -155,6 +158,7 @@ Direction: editorial precision.
 ## Language behaviour
 
 - English is the default language.
+- The language switch always keeps the visual order `EN / RU`; only the active state changes.
 - The language switch links to the equivalent page in the other locale.
 - The current locale is indicated with text and `aria-current`, not color alone.
 - Language selection does not depend on geolocation.
@@ -187,6 +191,14 @@ Direction: editorial precision.
 - Profi.ru: `https://profi.ru/profile/RogozinMU/`
 - Evgeni Koifman: `https://www.linkedin.com/in/evgeni-koifman-8a76141/`
 - Aviv Shemesh: `https://www.linkedin.com/in/aviv-shemesh/`
+- Avito: `https://www.avito.ru/company`
+- Alar Studios: `https://www.linkedin.com/company/alar-studios`
+- Group-IB: `https://www.group-ib.com/`
+- Lumos: `https://lumoss.ru/`
+- CodeClass: `https://code-class.ru/`
+- ITMO University: `https://fitp.itmo.ru/`
+
+Company and organisation names in the evidence strip, experience, case details, teaching and CV content link to these approved destinations.
 
 GitHub should not receive prominent placement until the profile is cleaned up. The link may remain in structured contact data or the extended CV.
 

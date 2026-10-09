@@ -15,6 +15,17 @@ Status: draft for content approval. This file contains public copy only. It does
 - Do not include the disputed PostgreSQL index story.
 - Do not use decorative claims such as `real systems`, `measurable impact`, `ownership beyond code` or `engineering that matters`.
 
+## Approved organisation links
+
+- Avito: `https://www.avito.ru/company`
+- Alar Studios: `https://www.linkedin.com/company/alar-studios`
+- Group-IB: `https://www.group-ib.com/`
+- Lumos: `https://lumoss.ru/`
+- CodeClass: `https://code-class.ru/`
+- ITMO University: `https://fitp.itmo.ru/`
+
+Use these links for organisation names in the evidence strip, experience, case details, teaching and CV content.
+
 ---
 
 # English
@@ -41,7 +52,7 @@ Status: draft for content approval. This file contains public copy only. It does
 ### Case links
 
 - Read the case
-- Back to selected work
+- Back to case studies
 - Next case
 
 ### Certificate viewer
@@ -52,7 +63,7 @@ Status: draft for content approval. This file contains public copy only. It does
 
 ### Footer
 
-Built with AI assistance. The content and final decisions are mine.
+Codex built this site and drove me mad while we filled it with content.
 
 ## Homepage metadata
 
@@ -88,7 +99,7 @@ Based in Saint Petersburg, Russia. Open to relocation.
 
 ### Actions
 
-- View selected work
+- View case studies
 - Download CV
 
 ## Evidence strip
@@ -98,11 +109,11 @@ Based in Saint Petersburg, Russia. Open to relocation.
 - Python and Go
 - 3 articles, 325K+ combined views
 
-## Selected work
+## Featured engineering case studies
 
 ### Section title
 
-Selected work
+Featured engineering case studies
 
 ### Avito card
 
@@ -521,7 +532,7 @@ How Mikhail Rogozin designed and delivered the backend for an attrition forecast
 
 ### Label
 
-Selected work / Workforce budgeting
+Featured engineering case studies / Workforce budgeting
 
 ### Title
 
@@ -606,7 +617,7 @@ The work could be split between engineers once the domain model and interfaces w
 
 ## End navigation
 
-- Back to selected work
+- Back to case studies
 - Next case: On-premise customer diagnostics for SCAILIUM
 
 ---
@@ -627,7 +638,7 @@ How Mikhail Rogozin proposed and built an on-premise diagnostics stack for SCAIL
 
 ### Label
 
-Selected work / Customer diagnostics
+Featured engineering case studies / Customer diagnostics
 
 ### Title
 
@@ -721,7 +732,7 @@ The 8.7/10 score came from customer developers who had worked with the released 
 
 ## End navigation
 
-- Back to selected work
+- Back to case studies
 - Previous case: Attrition forecasting for an internal workforce budgeting platform
 
 ---
@@ -750,7 +761,7 @@ The 8.7/10 score came from customer developers who had worked with the released 
 ### Ссылки на кейсы
 
 - Открыть кейс
-- Назад к проектам
+- Назад к инженерным кейсам
 - Следующий кейс
 
 ### Просмотр диплома
@@ -761,7 +772,7 @@ The 8.7/10 score came from customer developers who had worked with the released 
 
 ### Подвал
 
-Сайт создан с помощью ИИ. За содержание и финальные решения отвечаю я.
+Этот сайт создал Codex — и заставил меня перепроверить каждую строчку.
 
 ## Метаданные главной страницы
 
@@ -797,7 +808,7 @@ Senior Backend Engineer · Python & Go
 
 ### Действия
 
-- Посмотреть проекты
+- Посмотреть кейсы
 - Скачать резюме
 
 ## Краткие факты
@@ -807,11 +818,11 @@ Senior Backend Engineer · Python & Go
 - Python и Go
 - 3 статьи, более 325 тысяч просмотров
 
-## Избранные проекты
+## Ключевые инженерные кейсы
 
 ### Заголовок раздела
 
-Избранные проекты
+Ключевые инженерные кейсы
 
 ### Карточка Avito
 
@@ -1234,7 +1245,7 @@ PostgreSQL и SQL
 
 ### Метка
 
-Избранные проекты / Бюджетирование персонала
+Ключевые инженерные кейсы / Бюджетирование персонала
 
 ### Заголовок
 
@@ -1319,7 +1330,7 @@ C&B, FP&A и HR Admin нужно было учитывать отток в те�
 
 ## Навигация
 
-- Назад к проектам
+- Назад к инженерным кейсам
 - Следующий кейс: On-premise диагностика SCAILIUM
 
 ---
@@ -1340,7 +1351,7 @@ On-premise диагностика SCAILIUM
 
 ### Метка
 
-Избранные проекты / Диагностика у клиентов
+Ключевые инженерные кейсы / Диагностика у клиентов
 
 ### Заголовок
 
@@ -1434,5 +1445,5 @@ C++-разработчики добавили необходимые точки 
 
 ## Навигация
 
-- Назад к проектам
+- Назад к инженерным кейсам
 - Предыдущий кейс: Расчёт оттока в системе бюджетирования персонала
