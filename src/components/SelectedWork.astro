@@ -25,7 +25,14 @@ const readLabel = locale === 'en' ? 'Read the case' : 'Читать кейс';
           <p>{item.intro}</p>
           <dl class="work-details">
             {item.details.map((detail) => (
-              <div><dt>{detail.label}</dt><dd>{detail.value}</dd></div>
+              <div>
+                <dt>{detail.label}</dt>
+                <dd>
+                  {detail.href
+                    ? <a class="organisation-link" href={detail.href}>{detail.value}</a>
+                    : detail.value}
+                </dd>
+              </div>
             ))}
           </dl>
           <a class="text-link" href={`/${locale}/work/${item.slug}/`}>{readLabel} <span aria-hidden="true">↗</span></a>

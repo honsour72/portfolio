@@ -21,7 +21,7 @@ const cv = cvLinksForLocale(content.locale);
       <a class="button button-secondary" href={cv.compact} download>{content.hero.secondaryAction}</a>
     </div>
   </div>
-  <figure class="hero-portrait">
+  <div class="hero-portrait">
     <Image
       src={portrait}
       alt={content.locale === 'en' ? 'Mikhail Rogozin' : 'Михаил Рогозин'}
@@ -31,6 +31,5 @@ const cv = cvLinksForLocale(content.locale);
       loading="eager"
       fetchpriority="high"
     />
-    <figcaption>{content.hero.location}</figcaption>
-  </figure>
+  </div>
 </section>

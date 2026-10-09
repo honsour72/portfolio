@@ -13,7 +13,11 @@ const { content } = Astro.props;
       {content.details.map((detail) => (
         <div data-case-detail>
           <dt>{detail.label}</dt>
-          <dd>{detail.value}</dd>
+          <dd>
+            {detail.href
+              ? <a class="organisation-link" href={detail.href}>{detail.value}</a>
+              : detail.value}
+          </dd>
         </div>
       ))}
     </dl>

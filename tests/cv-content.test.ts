@@ -20,6 +20,18 @@ describe.each(['en', 'ru'] as const)('%s CV pages', (locale) => {
     expect(text).toContain('m@rogozin-pro.ru');
     expect($('a[href="mailto:m@rogozin-pro.ru"]').length).toBeGreaterThan(0);
     expect($('a[href="https://www.linkedin.com/in/michael-rogozin/"]').length).toBeGreaterThan(0);
+    expect($('a[href="https://www.avito.ru/company"]').length).toBeGreaterThan(0);
+    expect($('a[href="https://www.linkedin.com/company/alar-studios"]').length).toBeGreaterThan(0);
+    if (variant === 'extended') {
+      for (const organisationUrl of [
+        'https://www.group-ib.com/',
+        'https://lumoss.ru/',
+        'https://code-class.ru/',
+        'https://fitp.itmo.ru/',
+      ]) {
+        expect($(`a[href="${organisationUrl}"]`).length).toBeGreaterThan(0);
+      }
+    }
     expect($('[data-cv-page]').length).toBe(variant === 'compact' ? 1 : 2);
 
     for (const forbidden of ['phone', 'телефон', 'Clover', 'GraphQL', 'Hexagonal Architecture']) {

@@ -21,6 +21,12 @@ describe.each(['en', 'ru'] as const)('%s case studies', (locale) => {
       expect($('[data-case-section]').length).toBe(data.sections.length);
       expect($('[data-architecture-diagram]').attr('data-variant')).toBe(data.diagram.variant);
 
+      const company = data.details.find((detail) =>
+        detail.label.toLowerCase().includes(locale === 'en' ? 'company' : 'компания'),
+      );
+      expect(company?.href).toBeTruthy();
+      expect($(`.case-details a[href="${company?.href}"]`).text()).toBe(company?.value);
+
       for (const label of data.diagram.labels) {
         expect(text).toContain(label);
       }

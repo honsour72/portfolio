@@ -1,4 +1,5 @@
 import type { CaseSlug, CaseStudy, Locale } from '../lib/types';
+import { externalLinks } from './portfolio';
 
 export const evidence = {
   experienceYears: 6,
@@ -35,12 +36,12 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
         description:
           'How Mikhail Rogozin designed and delivered the backend for an attrition forecasting feature at Avito, from stakeholder interviews to production in under four months.',
       },
-      label: 'Selected work / Workforce budgeting',
+      label: 'Featured engineering case studies / Workforce budgeting',
       title: 'Attrition forecasting for an internal workforce budgeting platform',
       intro:
         'I took the backend work from the first stakeholder interviews to production in under four months. The released feature calculates monthly attrition and headcount restoration, includes the resulting workforce costs in budgeting scenarios, and sends the data to IBM Cognos Analytics.',
       details: [
-        { label: 'Company', value: 'Avito' },
+        { label: 'Company', value: 'Avito', href: externalLinks.avitoCompany },
         { label: 'Role', value: 'Backend Engineer, L4' },
         { label: 'Contribution', value: 'Architecture, core backend, reviews and delivery' },
         { label: 'Stack', value: 'Go, PostgreSQL, IBM Cognos Analytics' },
@@ -141,7 +142,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
           ],
         },
       ],
-      backLabel: 'Back to selected work',
+      backLabel: 'Back to case studies',
       adjacent: {
         label: 'Next case',
         title: 'On-premise customer diagnostics for SCAILIUM',
@@ -156,7 +157,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
         description:
           'How Mikhail Rogozin proposed and built an on-premise diagnostics stack for SCAILIUM using Python, Grafana, Loki, Prometheus and Tempo.',
       },
-      label: 'Selected work / Customer diagnostics',
+      label: 'Featured engineering case studies / Customer diagnostics',
       title: 'On-premise customer diagnostics for SCAILIUM',
       intro:
         'I proposed and built a diagnostics stack for SCAILIUM customer installations in under two months. It collected logs, metrics and query traces, and replaced the previous ELK workflow across customer environments.',
@@ -168,7 +169,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
         { label: 'Investigation', value: 'About one hour' },
       ],
       details: [
-        { label: 'Company', value: 'Alar Studios' },
+        { label: 'Company', value: 'Alar Studios', href: externalLinks.alarStudios },
         { label: 'Product', value: 'SCAILIUM' },
         { label: 'Role', value: 'Senior Software Engineer (Python)' },
         {
@@ -272,7 +273,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
           ],
         },
       ],
-      backLabel: 'Back to selected work',
+      backLabel: 'Back to case studies',
       adjacent: {
         label: 'Previous case',
         title: 'Attrition forecasting for an internal workforce budgeting platform',
@@ -289,12 +290,12 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
         description:
           'Как Михаил Рогозин спроектировал и выпустил бэкенд для расчёта оттока в Avito: от первых встреч с заказчиками до продакшена меньше чем за четыре месяца.',
       },
-      label: 'Избранные проекты / Бюджетирование персонала',
+      label: 'Ключевые инженерные кейсы / Бюджетирование персонала',
       title: 'Расчёт оттока в системе бюджетирования персонала',
       intro:
         'Я довёл бэкенд от первых встреч с заказчиками до продакшена меньше чем за четыре месяца. Выпущенная функция рассчитывает помесячный отток и восстановление численности, учитывает стоимость персонала в бюджетных сценариях и передаёт результат в IBM Cognos Analytics.',
       details: [
-        { label: 'Компания', value: 'Avito' },
+        { label: 'Компания', value: 'Avito', href: externalLinks.avitoCompany },
         { label: 'Роль', value: 'Backend Engineer, L4' },
         { label: 'Мой вклад', value: 'Архитектура, основная часть бэкенда, ревью и выпуск' },
         { label: 'Стек', value: 'Go, PostgreSQL, IBM Cognos Analytics' },
@@ -395,7 +396,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
           ],
         },
       ],
-      backLabel: 'Назад к проектам',
+      backLabel: 'Назад к инженерным кейсам',
       adjacent: {
         label: 'Следующий кейс',
         title: 'On-premise диагностика SCAILIUM',
@@ -410,7 +411,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
         description:
           'Как Михаил Рогозин предложил и разработал on-premise решение для диагностики SCAILIUM на Python, Grafana, Loki, Prometheus и Tempo.',
       },
-      label: 'Избранные проекты / Диагностика у клиентов',
+      label: 'Ключевые инженерные кейсы / Диагностика у клиентов',
       title: 'On-premise диагностика SCAILIUM',
       intro:
         'Я предложил и меньше чем за два месяца разработал решение для диагностики клиентских установок SCAILIUM. Оно собирало логи, метрики и трейсы запросов и заменило прежний процесс на базе ELK.',
@@ -422,7 +423,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
         { label: 'Расследование', value: 'Около часа' },
       ],
       details: [
-        { label: 'Компания', value: 'Alar Studios' },
+        { label: 'Компания', value: 'Alar Studios', href: externalLinks.alarStudios },
         { label: 'Продукт', value: 'SCAILIUM' },
         { label: 'Роль', value: 'Senior Software Engineer (Python)' },
         {
@@ -526,7 +527,7 @@ export const casesByLocale: Record<Locale, Record<CaseSlug, CaseStudy>> = {
           ],
         },
       ],
-      backLabel: 'Назад к проектам',
+      backLabel: 'Назад к инженерным кейсам',
       adjacent: {
         label: 'Предыдущий кейс',
         title: 'Расчёт оттока в системе бюджетирования персонала',

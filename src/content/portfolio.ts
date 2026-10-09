@@ -11,6 +11,12 @@ export const externalLinks = {
   profi: 'https://profi.ru/profile/RogozinMU/',
   evgeniKoifman: 'https://www.linkedin.com/in/evgeni-koifman-8a76141/',
   avivShemesh: 'https://www.linkedin.com/in/aviv-shemesh/',
+  avitoCompany: 'https://www.avito.ru/company',
+  alarStudios: 'https://www.linkedin.com/company/alar-studios',
+  groupIb: 'https://www.group-ib.com/',
+  lumos: 'https://lumoss.ru/',
+  codeClass: 'https://code-class.ru/',
+  itmoFitp: 'https://fitp.itmo.ru/',
 } as const;
 
 export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
@@ -42,20 +48,21 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       summary:
         'I build backend systems in Go and Python. My experience covers workforce budgeting, on-premise observability and security products.',
       location: 'Based in Saint Petersburg, Russia. Open to relocation.',
-      primaryAction: 'View selected work',
+      primaryAction: 'View case studies',
       secondaryAction: 'Download CV',
     },
     evidenceStrip: [
-      { label: 'Currently', value: 'Avito' },
+      { label: 'Currently', value: 'Avito', href: externalLinks.avitoCompany },
       { label: 'Experience', value: '6+ years in software development' },
       { label: 'Core', value: 'Python and Go' },
       { label: 'Writing', value: '3 articles, 325K+ combined views' },
     ],
-    selectedWorkTitle: 'Selected work',
+    selectedWorkTitle: 'Featured engineering case studies',
     experienceTitle: 'Experience',
     experience: [
       {
         company: 'Avito',
+        companyUrl: externalLinks.avitoCompany,
         role: 'Backend Engineer, L4',
         period: 'November 2024 to present',
         paragraphs: [
@@ -66,6 +73,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'Alar Studios',
+        companyUrl: externalLinks.alarStudios,
         role: 'Senior Software Engineer (Python)',
         period: 'August 2023 to September 2024',
         paragraphs: [
@@ -87,6 +95,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'Group-IB',
+        companyUrl: externalLinks.groupIb,
         role: 'Middle Python Backend Developer',
         period: 'August 2022 to June 2023',
         paragraphs: [
@@ -97,6 +106,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'Lumos',
+        companyUrl: externalLinks.lumos,
         role: 'Python Backend Developer',
         period: 'January 2021 to May 2022',
         paragraphs: [
@@ -107,6 +117,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'CodeClass',
+        companyUrl: externalLinks.codeClass,
         role: 'Instructor, later Junior Developer',
         period: 'January 2019 to December 2020',
         paragraphs: [
@@ -146,6 +157,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       entries: [
         {
           heading: 'Lecturer · ITMO University',
+          headingUrl: externalLinks.itmoFitp,
           period: 'February 2025 to present',
           paragraphs: [
             "I teach Go Programming and Software Architecture/System Design to 80 third-year bachelor's students in the Avito Start programme at the Faculty of Information Technologies and Programming.",
@@ -252,7 +264,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
         { label: 'Profi.ru', href: externalLinks.profi },
       ],
     },
-    footer: 'Built with AI assistance. The content and final decisions are mine.',
+    footer: 'Codex built this site and drove me mad while we filled it with content.',
   },
   ru: {
     locale: 'ru',
@@ -282,20 +294,21 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       summary:
         'Разрабатываю бэкенд-системы на Go и Python. Работал с бюджетированием персонала, on-premise observability и продуктами информационной безопасности.',
       location: 'Санкт-Петербург, Россия. Готов к релокации.',
-      primaryAction: 'Посмотреть проекты',
+      primaryAction: 'Посмотреть кейсы',
       secondaryAction: 'Скачать резюме',
     },
     evidenceStrip: [
-      { label: 'Сейчас', value: 'Avito' },
+      { label: 'Сейчас', value: 'Avito', href: externalLinks.avitoCompany },
       { label: 'Опыт', value: 'Более 6 лет в разработке' },
       { label: 'Основной стек', value: 'Python и Go' },
       { label: 'Статьи', value: '3 статьи, более 325 тысяч просмотров' },
     ],
-    selectedWorkTitle: 'Избранные проекты',
+    selectedWorkTitle: 'Ключевые инженерные кейсы',
     experienceTitle: 'Опыт',
     experience: [
       {
         company: 'Avito',
+        companyUrl: externalLinks.avitoCompany,
         role: 'Backend Engineer, L4',
         period: 'Ноябрь 2024 по настоящее время',
         paragraphs: [
@@ -306,6 +319,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'Alar Studios',
+        companyUrl: externalLinks.alarStudios,
         role: 'Senior Software Engineer (Python)',
         period: 'Август 2023 по сентябрь 2024',
         paragraphs: [
@@ -327,6 +341,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'Group-IB',
+        companyUrl: externalLinks.groupIb,
         role: 'Middle Python Backend Developer',
         period: 'Август 2022 по июнь 2023',
         paragraphs: [
@@ -337,6 +352,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'Lumos',
+        companyUrl: externalLinks.lumos,
         role: 'Python Backend Developer',
         period: 'Январь 2021 по май 2022',
         paragraphs: [
@@ -347,6 +363,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       },
       {
         company: 'CodeClass',
+        companyUrl: externalLinks.codeClass,
         role: 'Преподаватель, затем Junior Developer',
         period: 'Январь 2019 по декабрь 2020',
         paragraphs: [
@@ -386,6 +403,7 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
       entries: [
         {
           heading: 'Преподаватель · Университет ИТМО',
+          headingUrl: externalLinks.itmoFitp,
           period: 'Февраль 2025 по настоящее время',
           paragraphs: [
             'Преподаю программирование на Go и проектирование архитектуры ПО 80 студентам третьего курса бакалавриата на программе Avito Start факультета информационных технологий и программирования.',
@@ -493,6 +511,6 @@ export const portfolioByLocale: Record<'en' | 'ru', PortfolioContent> = {
         { label: 'Profi.ru', href: externalLinks.profi },
       ],
     },
-    footer: 'Сайт создан с помощью ИИ. За содержание и финальные решения отвечаю я.',
+    footer: 'Этот сайт создал Codex — и заставил меня перепроверить каждую строчку.',
   },
 };

@@ -60,7 +60,11 @@ const supportingTitle = lang === 'en' ? 'Teaching, writing and awards' : 'Пре
           <h2>{supportingTitle}</h2>
           <div class="cv-supporting-grid">
             <div>
-              <h3>{portfolio.teaching.entries[0].heading}</h3>
+              <h3>
+                {portfolio.teaching.entries[0].headingUrl
+                  ? <a href={portfolio.teaching.entries[0].headingUrl}>{portfolio.teaching.entries[0].heading}</a>
+                  : portfolio.teaching.entries[0].heading}
+              </h3>
               <p class="cv-meta">{portfolio.teaching.entries[0].period}</p>
               <p>{portfolio.teaching.entries[0].paragraphs.join(' ')}</p>
             </div>

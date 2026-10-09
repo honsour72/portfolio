@@ -10,10 +10,12 @@ export type Link = {
 export type Metric = {
   label: string;
   value: string;
+  href?: string;
 };
 
 export type ExperienceEntry = {
   company: string;
+  companyUrl?: string;
   role: string;
   period: string;
   paragraphs: string[];
@@ -73,6 +75,7 @@ export type PortfolioContent = {
     title: string;
     entries: Array<{
       heading: string;
+      headingUrl?: string;
       period: string;
       paragraphs: string[];
       proof?: string;
@@ -134,7 +137,7 @@ export type CaseStudy = {
   label: string;
   title: string;
   intro: string;
-  details: Array<{ label: string; value: string }>;
+  details: Array<{ label: string; value: string; href?: string }>;
   metrics?: Metric[];
   diagram: {
     variant: 'attrition' | 'observability';

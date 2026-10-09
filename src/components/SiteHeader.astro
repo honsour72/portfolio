@@ -8,8 +8,7 @@ type Props = { locale: Locale; path: string };
 
 const { locale, path } = Astro.props;
 const content = portfolioByLocale[locale];
-const otherLocale: Locale = locale === 'en' ? 'ru' : 'en';
-const otherPath = path.replace(`/${locale}/`, `/${otherLocale}/`);
+const localePath = (targetLocale: Locale) => path.replace(`/${locale}/`, `/${targetLocale}/`);
 ---
 
 <header class="site-header">
@@ -24,9 +23,13 @@ const otherPath = path.replace(`/${locale}/`, `/${otherLocale}/`);
     <div class="header-actions">
       <MobileNavigation locale={locale} navigation={content.navigation} />
       <div class="locale-switch" aria-label={locale === 'en' ? 'Language' : 'Язык'}>
-        <span aria-current="page">{locale.toUpperCase()}</span>
+        {locale === 'en'
+          ? <span aria-current="page">EN</span>
+          : <a href={localePath('en')} lang="en">EN</a>}
         <span aria-hidden="true">/</span>
-        <a href={otherPath} lang={otherLocale}>{otherLocale.toUpperCase()}</a>
+        {locale === 'ru'
+          ? <span aria-current="page">RU</span>
+          : <a href={localePath('ru')} lang="ru">RU</a>}
       </div>
       <CvMenu locale={locale} labels={content.cvMenu} />
     </div>

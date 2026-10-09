@@ -26,7 +26,11 @@ const { locale, content } = Astro.props;
       {content.entries.map((entry) => (
         <article>
           <p class="eyebrow">{entry.period}</p>
-          <h3>{entry.heading}</h3>
+          <h3>
+            {entry.headingUrl
+              ? <a class="organisation-link" href={entry.headingUrl}>{entry.heading}</a>
+              : entry.heading}
+          </h3>
           {entry.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           {entry.proof && <p class="proof-line">{entry.proof}</p>}
           {entry.link && <a class="text-link" href={entry.link.href}>{entry.link.label} <span aria-hidden="true">↗</span></a>}

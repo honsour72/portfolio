@@ -16,21 +16,24 @@ describe.each([
     locale: 'en' as const,
     name: 'Mikhail Rogozin',
     role: 'Senior Backend Engineer · Python & Go',
-    footer: 'Built with AI assistance. The content and final decisions are mine.',
+    workTitle: 'Featured engineering case studies',
+    footer: 'Codex built this site and drove me mad while we filled it with content.',
   },
   {
     locale: 'ru' as const,
     name: 'Михаил Рогозин',
     role: 'Senior Backend Engineer · Python & Go',
-    footer: 'Сайт создан с помощью ИИ. За содержание и финальные решения отвечаю я.',
+    workTitle: 'Ключевые инженерные кейсы',
+    footer: 'Этот сайт создал Codex — и заставил меня перепроверить каждую строчку.',
   },
-])('$locale homepage', ({ locale, name, role, footer }) => {
+])('$locale homepage', ({ locale, name, role, workTitle, footer }) => {
   it('renders the approved identity, evidence and section landmarks', () => {
     const { $ } = homepage(locale);
     const text = $('body').text();
 
     expect($('h1').text()).toContain(name);
     expect(text).toContain(role);
+    expect($('#work-title').text()).toBe(workTitle);
     expect($('[data-evidence]').length).toBe(4);
 
     for (const id of [
@@ -73,7 +76,28 @@ describe.each([
     expect(hrefs).toContain('https://www.linkedin.com/in/michael-rogozin/');
     expect(hrefs).toContain('https://t.me/honsour72');
     expect(hrefs).toContain('https://profi.ru/profile/RogozinMU/');
+    for (const organisationUrl of [
+      'https://www.avito.ru/company',
+      'https://www.linkedin.com/company/alar-studios',
+      'https://www.group-ib.com/',
+      'https://lumoss.ru/',
+      'https://code-class.ru/',
+      'https://fitp.itmo.ru/',
+    ]) {
+      expect(hrefs).toContain(organisationUrl);
+    }
     expect(text).toContain(footer);
+  });
+
+  it('keeps the language order stable and renders the portrait without a caption', () => {
+    const { $ } = homepage(locale);
+    const languageItems = $('.locale-switch')
+      .children()
+      .map((_, element) => $(element).text().trim())
+      .get();
+
+    expect(languageItems).toEqual(['EN', '/', 'RU']);
+    expect($('.hero-portrait figcaption')).toHaveLength(0);
   });
 
   it('does not render discarded slogans or unsupported claims', () => {

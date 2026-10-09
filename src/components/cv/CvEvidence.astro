@@ -10,7 +10,7 @@ const { cases, technical, locale } = Astro.props;
 ---
 
 <section class="cv-section cv-evidence">
-  <h2>{locale === 'en' ? 'Selected engineering work' : 'Избранные инженерные проекты'}</h2>
+  <h2>{locale === 'en' ? 'Featured engineering case studies' : 'Ключевые инженерные кейсы'}</h2>
   {cases.map((item) => (
     <article>
       <h3>{item.title}</h3>

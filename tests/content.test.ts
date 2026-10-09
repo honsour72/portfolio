@@ -20,6 +20,12 @@ describe('portfolio content contracts', () => {
       profi: 'https://profi.ru/profile/RogozinMU/',
       evgeniKoifman: 'https://www.linkedin.com/in/evgeni-koifman-8a76141/',
       avivShemesh: 'https://www.linkedin.com/in/aviv-shemesh/',
+      avitoCompany: 'https://www.avito.ru/company',
+      alarStudios: 'https://www.linkedin.com/company/alar-studios',
+      groupIb: 'https://www.group-ib.com/',
+      lumos: 'https://lumoss.ru/',
+      codeClass: 'https://code-class.ru/',
+      itmoFitp: 'https://fitp.itmo.ru/',
     });
   });
 

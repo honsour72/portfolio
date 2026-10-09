@@ -10,7 +10,13 @@ const { title, entries, concise = false } = Astro.props;
     {entries.map((entry) => (
       <article>
         <div class="cv-entry-title">
-          <h3>{entry.role} · {entry.company}</h3>
+          <h3>
+            {entry.role} · {
+              entry.companyUrl
+                ? <a href={entry.companyUrl}>{entry.company}</a>
+                : entry.company
+            }
+          </h3>
           <p>{entry.period}</p>
         </div>
         <p>{entry.paragraphs[0]}</p>

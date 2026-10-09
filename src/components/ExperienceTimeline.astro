@@ -19,7 +19,11 @@ const currentLabel = locale === 'en' ? 'Current' : 'Сейчас';
           {index === 0 && <span>{currentLabel}</span>}
         </div>
         <div class="timeline-body">
-          <p class="timeline-company">{entry.company}</p>
+          <p class="timeline-company">
+            {entry.companyUrl
+              ? <a class="organisation-link" href={entry.companyUrl}>{entry.company}</a>
+              : entry.company}
+          </p>
           <h3>{entry.role}</h3>
           {entry.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
           {entry.stack && (
