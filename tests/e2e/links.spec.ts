@@ -17,7 +17,7 @@ const internalRoutes = [
 ];
 
 for (const route of internalRoutes) {
-  test(`${route} returns a successful local response`, async ({ request }) => {
+  test(`${route} returns a successful response`, async ({ request }) => {
     const response = await request.get(route, { maxRedirects: 2 });
     expect(response.ok()).toBe(true);
   });

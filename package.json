@@ -9,6 +9,7 @@
     "test": "vitest",
     "build": "astro build",
     "test:e2e": "playwright test",
+    "test:production": "PLAYWRIGHT_BASE_URL=https://m-rogozin.ru playwright test",
     "generate:cv": "node scripts/generate-cv.mjs",
     "verify": "pnpm check && pnpm test --run && pnpm build && pnpm generate:cv && pnpm test:e2e"
   },
