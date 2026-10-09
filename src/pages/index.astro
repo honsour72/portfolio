@@ -1,16 +1,5 @@
 ---
-Astro.response.headers.set('Location', '/en/');
-Astro.response.status = 302;
+import HomePage from '../components/HomePage.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0;url=/en/" />
-    <title>Redirecting to the English portfolio</title>
-  </head>
-  <body>
-    <a href="/en/">Continue to the English portfolio</a>
-  </body>
-</html>
+<HomePage locale="en" />

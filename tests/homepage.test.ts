@@ -11,6 +11,16 @@ function homepage(locale: 'en' | 'ru') {
   return { html, $: load(html) };
 }
 
+it('renders the English homepage directly at the root without redirect markup', () => {
+  const html = readFileSync(join(root, 'dist', 'index.html'), 'utf8');
+  const $ = load(html);
+
+  expect($('html').attr('lang')).toBe('en');
+  expect($('h1').text()).toContain('Mikhail Rogozin');
+  expect($('#work-title').text()).toBe('Featured engineering case studies');
+  expect($('meta[http-equiv="refresh"]')).toHaveLength(0);
+});
+
 describe.each([
   {
     locale: 'en' as const,

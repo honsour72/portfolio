@@ -23,6 +23,14 @@ for (const route of internalRoutes) {
   });
 }
 
+test('root renders the English homepage without redirecting', async ({ page }) => {
+  const response = await page.goto('/');
+
+  expect(response?.status()).toBe(200);
+  expect(new URL(page.url()).pathname).toBe('/');
+  await expect(page.getByRole('heading', { level: 1, name: 'Mikhail Rogozin' })).toBeVisible();
+});
+
 test('homepage includes the confirmed public destinations', async ({ page }) => {
   await page.goto('/en/');
   const hrefs = await page.locator('a').evaluateAll((links) =>

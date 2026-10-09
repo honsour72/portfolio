@@ -35,7 +35,7 @@ The site is a hiring portfolio. It is not an immigration page and should not dis
 
 ### Public routes
 
-- `/` redirects to `/en/`.
+- `/` renders the English homepage directly without changing the browser URL.
 - `/en/`
 - `/ru/`
 - `/en/work/workforce-attrition/`
@@ -118,6 +118,7 @@ Direction: editorial precision.
 - Preserve the photographs. Do not generate or retouch Mikhail's face.
 - Produce responsive local formats and reserve image dimensions to prevent layout shift.
 - Show the hero photograph without a caption underneath it; location remains in the hero copy.
+- Reuse the original site's 256 × 256 favicon at `/favicon.ico`.
 
 ### Certificates
 

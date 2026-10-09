@@ -5,15 +5,17 @@ Scope: local static build only. No deployment, DNS change or production validati
 
 ## Automated checks
 
-- `pnpm check`: 58 files checked; 0 errors, 0 warnings and 0 hints.
-- `pnpm test --run`: 7 test files and 38 tests passed.
+- `pnpm check`: 59 files checked; 0 errors, 0 warnings and 0 hints.
+- `pnpm test --run`: 7 test files and 40 tests passed.
 - `pnpm build`: 11 static pages built successfully, including both locales, both case studies and four CV print routes.
 - `pnpm generate:cv`: four bilingual CV PDFs generated.
-- `pnpm test:e2e`: 40 Playwright tests passed.
+- `pnpm test:e2e`: 41 Playwright tests passed.
 - axe-core reported no WCAG A/AA violations on the English and Russian homepages and all four public case-study pages.
 - Responsive checks passed at 375 px, 768 px and 1440 px for the English homepage and both English case-study pages.
 - Keyboard focus, keyboard-only mobile navigation, reduced-motion behaviour, certificate dialogs, locale-preserving case navigation and CV menus passed.
 - All internal pages, CV downloads and certificate downloads returned successful local responses.
+- `/` renders the English homepage directly with a `200` response and does not change the browser URL.
+- The original 256 × 256 favicon is included and linked from every page.
 - The language switch keeps the fixed visual order `EN / RU` in both locales.
 - Approved organisation names link to their public pages in the evidence, experience, case, teaching and CV views.
 

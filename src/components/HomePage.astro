@@ -1,0 +1,39 @@
+---
+import type { Locale } from '../lib/types';
+import AboutContact from './AboutContact.astro';
+import Awards from './Awards.astro';
+import Education from './Education.astro';
+import EvidenceStrip from './EvidenceStrip.astro';
+import ExperienceTimeline from './ExperienceTimeline.astro';
+import Hero from './Hero.astro';
+import PersonJsonLd from './PersonJsonLd.astro';
+import PublicWork from './PublicWork.astro';
+import Recommendations from './Recommendations.astro';
+import SelectedWork from './SelectedWork.astro';
+import Teaching from './Teaching.astro';
+import TechnicalProfile from './TechnicalProfile.astro';
+import { casesByLocale, caseSlugs } from '../content/cases';
+import { portfolioByLocale } from '../content/portfolio';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+type Props = { locale: Locale };
+
+const { locale } = Astro.props;
+const content = portfolioByLocale[locale];
+const cases = caseSlugs.map((slug) => casesByLocale[locale][slug]);
+---
+
+<BaseLayout locale={locale} title={content.seo.title} description={content.seo.description} path={`/${locale}/`}>
+  <PersonJsonLd slot="head" locale={locale} />
+  <Hero content={content} />
+  <EvidenceStrip items={content.evidenceStrip} />
+  <SelectedWork locale={locale} title={content.selectedWorkTitle} cases={cases} />
+  <ExperienceTimeline locale={locale} title={content.experienceTitle} entries={content.experience} />
+  <TechnicalProfile content={content.technical} />
+  <Teaching locale={locale} content={content.teaching} />
+  <PublicWork content={content.publicWork} />
+  <Awards locale={locale} title={content.awardsTitle} awards={content.awards} />
+  <Recommendations title={content.recommendationsTitle} items={content.recommendations} note={content.recommendationNote} />
+  <Education content={content.education} />
+  <AboutContact content={content} />
+</BaseLayout>

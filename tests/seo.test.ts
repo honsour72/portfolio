@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { load } from 'cheerio';
@@ -25,6 +26,7 @@ describe('public metadata', () => {
     expect($('meta[property="og:title"]').attr('content')).toBeTruthy();
     expect($('meta[property="og:description"]').attr('content')).toBeTruthy();
     expect($('meta[name="twitter:card"]').attr('content')).toBe('summary_large_image');
+    expect($('link[rel="icon"]').attr('href')).toBe('/favicon.ico');
   });
 
   it.each(['en', 'ru'] as const)('publishes public-only Person JSON-LD on the %s homepage', (locale) => {
@@ -40,5 +42,14 @@ describe('public metadata', () => {
   it('emits robots and sitemap files', () => {
     expect(readFileSync(join(root, 'dist', 'robots.txt'), 'utf8')).toContain('Sitemap:');
     expect(readFileSync(join(root, 'dist', 'sitemap-index.xml'), 'utf8')).toContain('sitemap-0.xml');
+  });
+
+  it('publishes the original site favicon', () => {
+    const faviconPath = join(root, 'dist', 'favicon.ico');
+
+    expect(existsSync(faviconPath)).toBe(true);
+    expect(createHash('sha256').update(readFileSync(faviconPath)).digest('hex')).toBe(
+      'ecbc2730414377749fca66c3d88af69924cdeeb4b3cc55093174d9c78aa0f4c1',
+    );
   });
 });

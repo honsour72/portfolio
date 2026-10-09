@@ -1,42 +1,13 @@
 ---
-import AboutContact from '../../components/AboutContact.astro';
-import Awards from '../../components/Awards.astro';
-import Education from '../../components/Education.astro';
-import EvidenceStrip from '../../components/EvidenceStrip.astro';
-import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
-import Hero from '../../components/Hero.astro';
-import PublicWork from '../../components/PublicWork.astro';
-import PersonJsonLd from '../../components/PersonJsonLd.astro';
-import Recommendations from '../../components/Recommendations.astro';
-import SelectedWork from '../../components/SelectedWork.astro';
-import Teaching from '../../components/Teaching.astro';
-import TechnicalProfile from '../../components/TechnicalProfile.astro';
-import { casesByLocale, caseSlugs } from '../../content/cases';
-import { portfolioByLocale } from '../../content/portfolio';
+import HomePage from '../../components/HomePage.astro';
 import { locales } from '../../lib/i18n';
 import type { Locale } from '../../lib/types';
-import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export function getStaticPaths() {
   return locales.map((lang) => ({ params: { lang } }));
 }
 
 const lang = Astro.params.lang as Locale;
-const content = portfolioByLocale[lang];
-const cases = caseSlugs.map((slug) => casesByLocale[lang][slug]);
 ---
 
-<BaseLayout locale={lang} title={content.seo.title} description={content.seo.description} path={`/${lang}/`}>
-  <PersonJsonLd slot="head" locale={lang} />
-  <Hero content={content} />
-  <EvidenceStrip items={content.evidenceStrip} />
-  <SelectedWork locale={lang} title={content.selectedWorkTitle} cases={cases} />
-  <ExperienceTimeline locale={lang} title={content.experienceTitle} entries={content.experience} />
-  <TechnicalProfile content={content.technical} />
-  <Teaching locale={lang} content={content.teaching} />
-  <PublicWork content={content.publicWork} />
-  <Awards locale={lang} title={content.awardsTitle} awards={content.awards} />
-  <Recommendations title={content.recommendationsTitle} items={content.recommendations} note={content.recommendationNote} />
-  <Education content={content.education} />
-  <AboutContact content={content} />
-</BaseLayout>
+<HomePage locale={lang} />
