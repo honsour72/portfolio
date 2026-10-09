@@ -1,6 +1,6 @@
 # Local release verification
 
-Date: 2026-10-09
+Date: 2026-10-10
 Scope: local static build only. No deployment, DNS change or production validation was performed.
 
 ## Automated checks
@@ -9,9 +9,11 @@ Scope: local static build only. No deployment, DNS change or production validati
 - `pnpm test --run`: 7 test files and 40 tests passed.
 - `pnpm build`: 11 static pages built successfully, including both locales, both case studies and four CV print routes.
 - `pnpm generate:cv`: four bilingual CV PDFs generated.
-- `pnpm test:e2e`: 41 Playwright tests passed.
+- `pnpm test:e2e`: 51 Playwright tests passed.
 - axe-core reported no WCAG A/AA violations on the English and Russian homepages and all four public case-study pages.
-- Responsive checks passed at 375 px, 768 px and 1440 px for the English homepage and both English case-study pages.
+- Responsive page checks passed at 375 px, 768 px and 1440 px for the English homepage and both English case-study pages.
+- The open navigation panel was verified at 320 px, 360 px, 375 px, 390 px, 414 px, 600 px, 768 px, 820 px and 980 px. It keeps 16 px viewport gutters without clipping or horizontal overflow.
+- At 1024 px the mobile menu is hidden and the desktop navigation is visible.
 - Keyboard focus, keyboard-only mobile navigation, reduced-motion behaviour, certificate dialogs, locale-preserving case navigation and CV menus passed.
 - All internal pages, CV downloads and certificate downloads returned successful local responses.
 - `/` renders the English homepage directly with a `200` response and does not change the browser URL.
@@ -32,6 +34,7 @@ Scope: local static build only. No deployment, DNS change or production validati
 
 - Desktop: English homepage, Russian homepage, workforce-attrition case and SCAILIUM observability case.
 - Mobile at 375 × 812: English homepage, workforce-attrition case and SCAILIUM observability case.
+- Open navigation: visually reviewed at 375 px, 768 px and 980 px; the desktop navigation transition was reviewed at 1024 px.
 - The revised featured-case headings were checked at desktop width and at 375 × 812 without horizontal overflow.
 - The compact English CV and the first page of the extended English CV were reviewed as rendered pages.
 

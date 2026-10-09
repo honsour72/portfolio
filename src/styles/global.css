@@ -1392,6 +1392,18 @@ h3 {
     display: none;
   }
 
+  .mobile-navigation {
+    position: static;
+    display: block;
+  }
+
+  .mobile-navigation nav {
+    top: calc(100% + 1px);
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+
   .header-actions {
     justify-content: end;
   }
@@ -1524,7 +1536,7 @@ h3 {
   }
 
   .site-header {
-    position: static;
+    position: relative;
   }
 
   .header-inner {
@@ -1537,10 +1549,6 @@ h3 {
     overflow: hidden;
     padding-inline: 13px;
     white-space: nowrap;
-  }
-
-  .mobile-navigation {
-    display: block;
   }
 
   .cv-menu summary::before {
