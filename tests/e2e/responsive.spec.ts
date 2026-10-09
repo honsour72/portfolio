@@ -1,15 +1,19 @@
 import { expect, test } from '@playwright/test';
 
 const routes = [
+  '/',
   '/en/',
+  '/ru/',
   '/en/work/workforce-attrition/',
   '/en/work/scailium-observability/',
+  '/ru/work/workforce-attrition/',
+  '/ru/work/scailium-observability/',
 ];
 
-for (const width of [375, 768, 1440]) {
+for (const width of [320, 360, 375, 390, 414, 600, 768, 820, 980, 1024, 1440]) {
   for (const route of routes) {
     test(`${route} has no horizontal overflow at ${width}px`, async ({ page }) => {
-      await page.setViewportSize({ width, height: width === 375 ? 812 : 1000 });
+      await page.setViewportSize({ width, height: width <= 414 ? 812 : 1000 });
       await page.goto(route);
       const dimensions = await page.evaluate(() => ({
         viewport: document.documentElement.clientWidth,
@@ -21,14 +25,112 @@ for (const width of [375, 768, 1440]) {
   }
 }
 
-test('mobile certificate viewer and CV menu fit the viewport', async ({ page }) => {
-  await page.setViewportSize({ width: 375, height: 812 });
+for (const width of [320, 375, 414, 600]) {
+  test(`certificate viewers keep their contents inside the viewport at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 812 });
+    await page.goto('/en/#awards');
+
+    const openers = page.getByRole('button', { name: 'View certificate' });
+    for (let index = 0; index < await openers.count(); index += 1) {
+      await openers.nth(index).click();
+      const dialog = page.locator('.certificate-dialog[open]');
+      const bounds = await dialog.evaluate((element) => {
+        const panel = element.querySelector<HTMLElement>('.certificate-dialog-panel');
+        const bar = element.querySelector<HTMLElement>('.certificate-dialog-bar');
+        const image = element.querySelector<HTMLImageElement>('img');
+        const download = element.querySelector<HTMLElement>('.button');
+        if (!panel || !bar || !image || !download) throw new Error('Incomplete certificate viewer');
+
+        const rect = (target: HTMLElement) => {
+          const value = target.getBoundingClientRect();
+          return { top: value.top, bottom: value.bottom, left: value.left, right: value.right };
+        };
+
+        return {
+          viewport: { width: window.innerWidth, height: window.innerHeight },
+          panel: rect(panel),
+          bar: rect(bar),
+          image: rect(image),
+          download: rect(download),
+          panelScrollHeight: panel.scrollHeight,
+          panelClientHeight: panel.clientHeight,
+        };
+      });
+
+      expect(bounds.panel.left).toBeGreaterThanOrEqual(0);
+      expect(bounds.panel.right).toBeLessThanOrEqual(bounds.viewport.width);
+      expect(bounds.panel.top).toBeGreaterThanOrEqual(0);
+      expect(bounds.panel.bottom).toBeLessThanOrEqual(bounds.viewport.height);
+      expect(bounds.image.top).toBeGreaterThanOrEqual(bounds.bar.bottom);
+      expect(bounds.image.bottom).toBeLessThanOrEqual(bounds.download.top);
+      expect(bounds.download.bottom).toBeLessThanOrEqual(bounds.panel.bottom);
+      expect(bounds.panelScrollHeight).toBeLessThanOrEqual(bounds.panelClientHeight + 1);
+
+      await dialog.locator('[data-certificate-close]').click();
+    }
+  });
+}
+
+test('certificate previews keep their portrait orientation on narrow screens', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 812 });
+  await page.goto('/en/#awards');
+
+  const previews = page.locator('.certificate-thumbnail img');
+  for (let index = 0; index < await previews.count(); index += 1) {
+    const bounds = await previews.nth(index).boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.height).toBeGreaterThan(bounds!.width);
+  }
+});
+
+test('CV menu fits the narrowest supported viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 812 });
   await page.goto('/en/');
   await page.locator('[data-cv-menu] summary').click();
   await expect(page.locator('.cv-menu-panel')).toBeInViewport();
+});
 
-  await page.getByRole('button', { name: 'View certificate' }).first().click();
-  await expect(page.getByRole('dialog', { name: /certificate/i })).toBeInViewport();
+for (const width of [320, 600, 768, 820, 980]) {
+  test(`decorative case visuals are removed from the stacked layout at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    await expect(page.locator('.work-visual').first()).toBeHidden();
+    await expect(page.locator('.work-visual').last()).toBeHidden();
+  });
+}
+
+test('decorative case visuals remain in the desktop split layout', async ({ page }) => {
+  await page.setViewportSize({ width: 1024, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.work-visual').first()).toBeVisible();
+  await expect(page.locator('.work-visual').last()).toBeVisible();
+});
+
+test('section numbers sit above narrow-screen headings', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 812 });
+  await page.goto('/ru/');
+
+  for (const selector of ['#work', '#teaching', '#recommendations']) {
+    const heading = page.locator(`${selector} .section-heading`).first();
+    const numberBounds = await heading.locator('.section-number').boundingBox();
+    const titleBounds = await heading.locator('h2').boundingBox();
+    expect(numberBounds).not.toBeNull();
+    expect(titleBounds).not.toBeNull();
+    expect(numberBounds!.y + numberBounds!.height).toBeLessThanOrEqual(titleBounds!.y);
+  }
+});
+
+test('hero actions stack on the narrowest supported viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 812 });
+  await page.goto('/');
+
+  const actions = page.locator('.hero-actions .button');
+  const first = await actions.nth(0).boundingBox();
+  const second = await actions.nth(1).boundingBox();
+  expect(first).not.toBeNull();
+  expect(second).not.toBeNull();
+  expect(first!.y + first!.height).toBeLessThanOrEqual(second!.y);
+  expect(first!.width).toBeCloseTo(second!.width, 0);
 });
 
 for (const width of [320, 360, 375, 390, 414, 600]) {

@@ -25,6 +25,15 @@ test('certificate viewer closes on the backdrop and preserves a direct PDF downl
   await expect(dialog).toBeHidden();
 });
 
+test('certificate thumbnail opens the viewer while preserving its fallback image link', async ({ page }) => {
+  await page.goto('/en/#awards');
+  const thumbnail = page.locator('.certificate-thumbnail').first();
+
+  await expect(thumbnail).toHaveAttribute('href', '/images/certificates/startup-hackathon-2021.png');
+  await thumbnail.click();
+  await expect(page.getByRole('dialog', { name: /startup hackathon 2021 certificate/i })).toBeVisible();
+});
+
 test('CV menu exposes locale-matched downloads', async ({ page }) => {
   await page.goto('/ru/');
   await page.locator('[data-cv-menu] summary').click();
